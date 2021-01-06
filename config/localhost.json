@@ -1,0 +1,13 @@
+{
+    "appName": "Flight Tracker",
+    "autoStartSim": true,
+    "csvInFolder": "../rawData/in/",
+    "csvOutFolder": " ../rawData/out/",
+    "simLoopInterval": 5500,
+    "csvExportInterval": 10000,
+    "map": {
+        "queryCenterPoint": [41.979246, -87.906914],
+        "uiCenterPoint": [35.260898, -116.687073],
+        "queryOffset": 1
+    }
+}

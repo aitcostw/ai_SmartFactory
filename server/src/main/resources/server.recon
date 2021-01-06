@@ -1,0 +1,79 @@
+flightInfo: @fabric {
+  @plane(class: "swim.flightinfo.ApplicationPlane")
+
+  @node {
+    pattern: "/aggregation"
+    @agent(class: "swim.flightinfo.agents.AggregationAgent") {
+      config: {
+        serverUrl: "ws://127.0.0.1:9001" 
+      }
+    }
+  }    
+
+  @node {
+    pattern: "/airplanes/:callsign"
+    @agent(class: "swim.flightinfo.agents.AirplaneAgent") {
+      config: {
+        serverUrl: "ws://127.0.0.1:9001" 
+      }
+    }
+  }    
+
+  @node {
+    pattern: "/airport/:id"
+    @agent(class: "swim.flightinfo.agents.AirportAgent") {
+      config: {
+        serverUrl: "ws://127.0.0.1:9001" 
+      }
+    }
+  }    
+
+  @node {
+    pattern: "/bridge/airplaneData"
+    @agent(class: "swim.flightinfo.agents.bridges.AirplaneDataAgent") {
+      config: {
+        apiUrl: "https://<api_username>:<api_password>@opensky-network.org/api"
+      }
+    }
+  } 
+
+  @node {
+    pattern: "/config"
+    @agent(class: "swim.flightinfo.configUtil.ConfigAgent")
+  }    
+
+  @node {
+    pattern: "/userPrefs/:userGuid"
+    @agent(class: "swim.flightinfo.agents.ui.UserPrefsAgent")
+  }    
+
+  @node {
+    pattern: "/layoutManager"
+    @agent(class: "swim.flightinfo.agents.ui.LayoutsManagerAgent")
+  }    
+
+  @node {
+    pattern: "/layout/:id"
+    @agent(class: "swim.flightinfo.agents.ui.LayoutAgent")
+  }  
+
+
+     
+}
+
+http1: @web(port: 9001) {
+  space: "flightInfo"
+  documentRoot: "../ui/"
+  @websocket {
+    serverCompressionLevel: 0# -1 = default; 0 = off; 1-9 = deflate level
+    clientCompressionLevel: 0# -1 = default; 0 = off; 1-9 = deflate level
+  }
+}
+#http2: @web(port: 80) {
+#  space: "flightInfo"
+#  documentRoot: "../ui/"
+#  @websocket {
+#    serverCompressionLevel: 0# -1 = default; 0 = off; 1-9 = deflate level
+#    clientCompressionLevel: 0# -1 = default; 0 = off; 1-9 = deflate level
+#  }
+#}
