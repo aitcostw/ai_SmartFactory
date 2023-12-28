@@ -3,6 +3,7 @@
 # Smart Factory Automation
 ## Data Analytics using semiconductor factory dataset
 ## A Simulator and Production solutions are available
+## AI Test Center for semiconductor testing solution
 
 ## Introduction
 
